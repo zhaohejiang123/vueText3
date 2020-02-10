@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <style>
+        .box{
+            width: 100px;height: 100px;
+            background: blue;
+        }
+    
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-show="isShow" class="box">
+            
+
+        </div>
+            <!-- <input type="radio" value="男" v-model="inp">
+            <input type="radio" value="女" v-model="inp">
+            {{inp}}
+            <div v-if="show">男人的衣柜</div>
+            <div v-else>女人的衣柜</div> -->
+        
+
+    </div>
+    
+</body>
+<script>
+    let vm=new Vue({
+        el:"#app",
+        data() {
+            return {
+                isShow:false,
+                inp:true,
+                show:true,
+                obj:{
+                    name:"虽然如果",
+                    age:18
+                }
+            }
+        },
+        methods: {
+            
+        },
+        computed: {
+            
+        },
+        watch: {
+            isShow(val){
+                console.log(val)
+            },
+            inp(val){
+                console.log(val)
+                if (val=="男") {
+                    this.show=true
+                }else{
+                    this.show=false
+                }
+            },
+            // "obj.name":function(val){
+            //     console.log(val) 
+            // },
+            obj:{
+                handler(newval,oldval){
+                    console.log(newval,oldval)
+
+                },
+                deep:true
+            },
+        },
+    })
+
+
+</script>
+</html>

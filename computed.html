@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{ pin() }}</p>
+        <p>{{ number }}</p>
+        <p>{{ pin2 }}</p>
+        <ul>
+            <li v-for="(itme,index) in list" :key="index">
+                {{ itme.pirce }}
+                
+            </li>
+        </ul>
+        <p>总价：{{ zong }}</p>
+    </div>
+    
+</body>
+<script>
+    let vm=new Vue({
+        el:"#app",
+        data() {
+            return {
+                name:'十三个',
+                age:18,
+                sex:"男",
+                number:0,
+                list:[
+                    {name:"热恩",pirce:10},
+                    {name:"热恩",pirce:5},
+                    {name:"热恩",pirce:15},
+                ]
+            }
+        },
+        methods: {
+            pin(){
+                console.log('pin')
+                return this.name+this.age+this.sex
+            }
+        },
+        computed: {
+            pin2(){
+                console.log('pin2')
+                return this.name+this.age+this.sex
+            },
+            zong(){
+                var num=0
+                this.list.forEach((itme,index)=>{
+                    num+=itme.pirce
+                })
+                return num
+            },
+            // cc(){
+            //     localStorage.set
+            // }
+            
+        },
+    })
+
+
+</script>
+</html>

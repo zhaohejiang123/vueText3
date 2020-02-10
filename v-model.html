@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<body>
+    <div id="app">   
+        <!-- <input type="text" @input="inputFn(event)" :value="value">
+        {{ value }} -->
+        <br>
+
+        <input type="text" v-model="value">
+        {{ value }}
+        <br>
+
+        <input type="radio" value="男" v-model="radioValue">
+        <input type="radio" value="女" v-model="radioValue">
+        {{ radioValue }}
+        <br>
+        <label for="xj">香蕉</label>
+        <input type="checkbox" id="xj" value="香蕉" v-model="radioList">
+        <label for="pg">苹果</label>
+        <input type="checkbox" id="pg" value="苹果" v-model="radioList">
+        <label for="hlg">hlg</label>
+        <input type="checkbox" id="hlg" value="火龙果" v-model="radioList">
+        <label for="li">梨</label>
+        <input type="checkbox" id="li" value="梨" v-model="radioList">
+        <label for="sz">柿子</label>
+        <input type="checkbox" id="sz" value="柿子" v-model="radioList">
+        <label for="mg">芒果</label>
+        <input type="checkbox" id="mg" value="芒果" v-model="radioList">
+        {{ radioList }}
+        <br>
+        <!-- disabled  不可选 -->
+        <!-- multiple  多选 -->
+        <select name="" id="" v-model="option" multiple>
+            <option value="" disabled>请选择</option>
+            <option value="十点半">十点半</option>
+            <option value="然后把">然后把</option>
+            <option value="前二天">前二天</option>
+            <option value="地图热门">地图热门</option>
+        </select>
+        {{ option }}
+
+    </div>
+    
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        data() {
+            return {
+                value:"",
+                radioValue:'',
+                radioList:[],
+                option:"",
+                // option:[],
+            }
+        },
+        methods: {
+            inputFn(e){
+                console.log(e.target.value)
+                this.value=e.target.value
+            }
+        },
+    })
+
+</script>
+</html>

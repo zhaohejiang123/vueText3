@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(itme,index) in list">
+                <p>{{ itme.name }}</p>
+                <p>{{ itme.pirce | asdfg }}</p>
+                <p>{{ itme.pirce | pirce }}</p>
+                <p>{{ itme.pirce | toDecimal2 }}</p>
+            </li>
+        </ul>
+        
+    </div>
+</body>
+<script>
+    Vue.filter("pirce",function(val){
+        return val+"++++++++++++++++++++++++++"
+    })
+    Vue.filter('toDecimal2', x => {
+    var f = parseFloat(x);
+    if (isNaN(f)) {
+        return false;
+    }
+    var f = Math.round(x * 100) / 100;
+    var s = f.toString();
+    var rs = s.indexOf('.');
+    if (rs < 0) {
+        rs = s.length;
+        s += '.';
+    }
+    while (s.length <= rs + 2) {
+        s += '0';
+    }
+    return s;
+    });
+    new Vue({
+        el:"#app",
+        data() {
+            return {
+                list:[
+                    {name:"热恩",pirce:10},
+                    {name:"热恩",pirce:5},
+                    {name:"热恩",pirce:15},
+                ]
+            }
+        },
+        methods: {
+            
+        },
+        filters:{
+            asdfg(val){
+                return val+"!!!!!!!!!!!!!!"
+            }
+        }
+
+    })
+
+</script>
+</html>

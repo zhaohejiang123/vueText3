@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            width: 200px;height: 200px;
+            background: yellow;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="box" v-drag="'refName'"></div>
+    </div>
+</body>
+<script>
+    Vue.directive('drag', {    //自定义指令
+        inserted: function (el) {           
+            el.onmousedown=function(ev){                    //鼠标点击div时     onmousedown 属性在点击鼠标按钮时触发
+                console.log(ev)
+                var disX=ev.clientX-el.offsetLeft;          //鼠标箭头距屏幕左边的距离  减去  div距屏幕左边的距离     得到    鼠标箭头距div左边框的距离
+                var disY=ev.clientY-el.offsetTop;           //鼠标箭头距屏幕上边的距离  减去  div距屏幕上边的距离     得到    鼠标箭头距div上边框的距离
+                document.onmousemove=function(ev){          //拖拽div时     onmousemove 属性在鼠标指针移动时触发
+                    var l=ev.clientX-disX;                  //移动时 鼠标箭头距屏幕左边的距离    减去  鼠标箭头距div左边框的距离    得到    鼠标移动时div左边框距屏幕左边的距离
+                    var t=ev.clientY-disY;                  //移动时 鼠标箭头距屏幕上边的距离    减去  鼠标箭头距div上边框的距离    得到    鼠标移动时div左边框距屏幕上边的距离
+                    el.style.left=l+'px';                   //鼠标移动时div左边框距屏幕左边的距离
+                    el.style.top=t+'px';                    //鼠标移动时div左边框距屏幕上边的距离
+                };
+                document.onmouseup=function(){              // 鼠标抬起时    onmouseup 属性在松开鼠标按钮时触发。
+                    document.onmousemove=null;              //销毁鼠标按下事件
+                    document.onmouseup=null;                //销毁鼠标移动事件
+                };
+            };
+        }
+    })
+    new Vue({
+        el:"#app",
+        data() {
+            return {
+                num:5
+               
+            }
+        },
+        methods: {
+      
+        },
+        computed: {
+           
+        },
+    })
+</script>
+</html>

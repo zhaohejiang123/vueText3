@@ -1,0 +1,86 @@
+双向数据绑定
+    v-model: 给input框绑定一个值，这个可以控制试图，试图中的value发生变化，数据也跟着改变
+         input type类型为text，v-model绑定的值，为字符串
+         input type类型为radio，v-model绑定的值，为字符串
+         input type类型为checkbox，v-model绑定的值，为数组
+         select标签，绑定的为字符串，多选为数组
+
+计算属性computed，监听watch，以及方法methods的区别
+    computed: 当计算属性中，依赖的值，发生改变时，才会从新计算
+    methods：只要页面用到的数据，发生改变，无论什么属性，那么都会重新触发
+    watch: 监听一个属性，当属性值，发生改变时，出发到监听事件
+         深度监听：  deep 属性 为 true时，可以对对象这种复杂的数据结构进行监听，触发监听事件
+
+过滤器：
+    全局：  // 全局过滤器
+            Vue.filter("price",function(val) {
+                return val
+            })
+            第一个参数为过滤器的名字，第二个参数为回调方法，里面的形参为，过滤器需要过滤的值
+
+            语法：
+            {{ 123456 | price }}
+
+    局部：
+    // 局部过滤器
+        filters:{
+            priceAdd$(val){
+                // console.log(val)
+                return "$"+val+"!!!!!!!!!!!!"
+            }
+        }
+        语法：
+            {{ 123456 | priceAdd$ }}
+
+
+自定义指令：
+    全局：
+
+    // 全局自定义指令封装
+    Vue.directive("block",{  // 第一个参数就是指令名字，第二个是一个对象，对象里面有五个钩子函数
+        bind() {  // 数据绑定函数
+            console.log("bind")
+        },
+        inserted(el,binding,vnode,v) {  // 子节点向父节点插入时
+            console.log("inserted")
+            binding.value&&(el.style.display= "block")
+            !binding.value&&(el.style.display= "none")
+        },
+        update(el,binding) { // 更新数据时触发
+            console.log("updated")
+            // console.log(binding.value)
+        },
+        componentUpdated(el,binding) { // 更新数据结束时触发
+            console.log("componentUpdated")
+            // console.log(binding.value)
+            binding.value&&(el.style.display= "block")
+            !binding.value&&(el.style.display= "none")
+        },
+        unbind() { // 销毁时触发
+            console.log("unbind")
+        }
+    })
+    // 销毁
+    function unbind() {
+        vm.$destroy()
+    }
+
+
+    局部自定义指令：
+    // 局部自定义指令
+        directives:{
+            text2:{
+                inserted(el,binding) {
+                    console.log(el)
+                    console.log(binding)
+                    el.innerHTML= binding.value
+                }
+            }
+        }
+
+
+
+
+
+
+

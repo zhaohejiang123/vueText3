@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <title>Document</title>
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input v-focus type="text">
+        <div v-text="123"></div>
+        <div v-text2="message"></div>
+        <div v-block="isShow">隐藏显示内容</div>
+        <button @click="qie">切换</button>
+        <button @click="unbind">销毁</button>
+    </div>
+</body>
+<script>
+    // 全局自定义指令封装
+    Vue.directive("focus",{
+        inserted(el,binding,vnode,v) {
+           
+            el.focus()
+        }
+    })
+    function unbind() {//销毁
+        vm.$destroy()
+    }
+    // 全局自定义指令封装
+    Vue.directive("block",{
+        bind() {
+            console.log("bind绑定")
+        },
+        inserted(el,binding,vnode,v) {
+            console.log("inserted插入父节点时")
+        },
+        update(el,binding) {
+            console.log("updated更新")
+        },
+        componentUpdated(el,binding) {
+            console.log("componentUpdated更新完成")
+            // console.log(binding.value)
+            binding.value&&(el.style.display= "block")
+            !binding.value&&(el.style.display= "none")
+        },
+        unbind() {
+            console.log("unbind解绑")
+        }
+        
+
+    })
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            message:"内容",
+            isShow:false
+        },
+        methods:{
+            qie() {
+                this.isShow = !this.isShow
+            }
+        },
+        // 局部过滤器
+        filters:{
+            priceAdd$(val){
+                // console.log(val)
+                return "$"+val+"!!!!!!!!!!!!"
+            }
+        },
+        // 局部自定义指令
+        directives:{
+            text2:{
+                inserted(el,binding) {
+                    console.log(el)
+                    console.log(binding)
+                    el.innerHTML= binding.value
+                }
+            }
+        }
+        
+    })
+</script>
+</html>

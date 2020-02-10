@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		function fn(){
+//			arguments  储存实参；
+			console.log(arguments.callee);//返回当前这个函数；
+			
+			arguments[0]
+			for(var i = 0 ; i < arguments.length ; i++){
+				arguments[i];
+                console.log(arguments)
+			}
+			
+		}
+		fn(1,2,3,4,5,8,6,7,"sad");
+		alert(fn);
+	</script>
+</html>
